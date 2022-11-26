@@ -1,6 +1,7 @@
 package main
 
 import (
+	appproto "github.com/Xanvial/tutorial-grpc/proto"
 	"log"
 	"net"
 
@@ -27,7 +28,7 @@ func main() {
 
 	// register server using reflection
 	reflection.Register(grpcServer)
-
+	appproto.RegisterProductServiceServer(grpcServer, productHandler)
 	log.Println("start listening on port: 9000")
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %s", err)
